@@ -272,8 +272,7 @@ contract Minion is IERC721Receiver, IERC1155Receiver {
 
         require(isPassed, "proposal execution requirements not met");
         
-        // withdraw from parent Minion
-        if(action.token != address(0) && moloch.getUserTokenBalance(address(this), action.token) >= action.amount) {
+        if(moloch.getUserTokenBalance(address(this), action.token) >= action.amount) {
             doWithdraw(action.token, action.amount);
         }
         
@@ -333,6 +332,7 @@ contract Minion is IERC721Receiver, IERC1155Receiver {
     }
 
     receive() external payable {}
+    fallback() external payable {}
 }
 
 /*
@@ -373,7 +373,7 @@ contract MinionFactory is CloneFactory {
     address[] public minionList; 
     mapping (address => AMinion) public minions;
     
-    event SummonMinion(address indexed minion, address indexed moloch, string details, string minionType);
+    event SummonMinion(address indexed minion, address indexed moloch, string details, string minionType, uint256 minQuorum);
     
     struct AMinion {
         address moloch;
@@ -393,7 +393,7 @@ contract MinionFactory is CloneFactory {
         
         minions[address(minion)] = AMinion(moloch, details);
         minionList.push(address(minion));
-        emit SummonMinion(address(minion), moloch, details, minionType);
+        emit SummonMinion(address(minion), moloch, details, minionType, minQuorum);
         
         return(address(minion));
         
