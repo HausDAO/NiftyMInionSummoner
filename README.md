@@ -35,6 +35,7 @@ A token can be proposed to be transfered from the main treasury in the proposal,
 ### version 1
 
 xDAI
-    factory - 0x166171416d3Cb5a23F719f23c62633e454A32A1b
-    template - 0x0BCa9E636B45604Ca152D6DEF15022174681f2E2
+    factory - 0xA6B75C3EBfA5a5F801F634812ABCb6Fd7055fd6d
 
+Polygon
+    factory - 0x4CCaDF3f5734436B28869c27A11B6D0F4776bc8E
